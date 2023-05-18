@@ -5,4 +5,13 @@ async function registrarUsuario(nick) {
 
 }
 
+async function buscarSala(idsala){
+    let user = await db.findOne("usuarios", iduser);
+    return user;
+}
+
+async function alterarUsuario(user){
+    return await db.updateOne("usuarios", user,{_id:user._id});
+}
+
 module.exports = {registrarUsuario}
