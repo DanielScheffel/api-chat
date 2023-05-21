@@ -45,3 +45,7 @@ exports.buscarMensagens = async(idsala, timesstamp) => {
         "msgs": mensagens
     };
 }
+
+// exports.sair = async(iduser, idsala) = {
+//     let sairSala = await salaModel.
+// }

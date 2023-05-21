@@ -39,7 +39,7 @@ app.use("/sala/entrar", router.put("/sala/entrar", async(req, res) => {
     res.status(200).send(resp);
 }))
 
-app.use("/salas/mensagem/", router.post("/sala/mensagem", async(req, res) => {
+app.use("/sala/mensagem/", router.post("/sala/mensagem", async(req, res) => {
     if(!token.checkToken(req.headers.token, req.headers.iduser,req.headers.nick)) return false;
     let resp = await salaController.enviarMensagem(req.headers.nick, req.body.msg, req.body.idsala);
     res.status(200).send(resp);
@@ -50,5 +50,17 @@ app.use("/sala/mensgens/", router.get("/sala/mensagens", async(req, res) => {
     let resp = await salaController.buscarMensagens(req.query.idsala, req.query.timestamp);
     res.status(200).send(resp);
 }))
+
+// app.use("/sala/sair", router.get("/sala/sair", async(req, res) => {
+//     if(!token.checkToken(req.headers.token, req.headers.iduser,req.headers.nick)) return false;
+//     let resp = await salaController.sair(req.headers.iduser, req.query.idsala);
+//     res.status(200).send(resp);
+// }))
+
+// app.use("/sair", router.post("/sair", async(req, res) => {
+//     if(!token.checkToken(req.headers.token, req.headers.iduser,req.headers.nick)) return false;
+//     let resp = await usuarioController.sair(req.headers.iduser);
+//     res.status(200).send(resp);
+// }))
 
 module.exports = app;
