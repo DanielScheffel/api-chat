@@ -3,6 +3,7 @@ const app = express();
 const salaController = require("./controllers/salaController");
 const usuarioController = require("./controllers/usuarioController");
 
+
 app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 
@@ -20,15 +21,12 @@ app.use("/", router.get("/sobre", (req, res, next) => {
 }));
 
 app.use("/salas", router.get("/salas", async(req, res, next) => {
-    if(await checkToken(req.headers.token,req.headers.iduser, req.headers.nick)){
-        let resp = salaController.get();
-        res.status(200).send(resp);
-    } else{
-        res.status(400).send({msg: "Usuário não autorizado"});
-    }
+    let resp = salaController.get();
+    res.status(200).send(resp);
 }));
 
 app.use("/entrar", router.post("/entrar", async(req, res, next) => {
+    if(Token.checkToken(req.headers.token.req.headers.idUser.req.headers.nick)) return false;
     let resp = await usuarioController.entrar(req.body.nick);
     res.status(200).send(resp);
 }));

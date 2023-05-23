@@ -5,21 +5,21 @@ let singleton;
 async function connect(){
     if(singleton) return singleton;
 
-    const client = new MongoClient(process.env.DB_host);
+    const client = new MongoClient(process.env.DB_HOST);
     await client.connect();
 
     singleton = client.db(process.env.DB_DATABASE);
     return singleton;
 }
 
-async function findAll(collection){
+let findAll = async(collection) => {
     const db = await connect();
-    return await db.collection(collection).findAll().toArray();
+    return await db.collection(collection).find().toArray();
 }
 
-async function insertOne(collection, objeto){
+async function insertOne(collection, object){
     const db = await connect();
-    return db.collection(collection).insertOne(objeto);
+    return db.collection(collection).insertOne(object);
 }
 
 async function findOne(collection, _id){
@@ -36,4 +36,4 @@ async function updateOne(collection, object, param){
     return result;
 }
 
-module.exports = {findAll}
+module.exports = {findAll, insertOne, findOne, updateOne}

@@ -12,12 +12,6 @@ exports.entrar = async(nick) => {
     }
 }
 
-// exports.sair = async(nick, idUser) => {
-//     let resp = await usuarioModel.sair(idUser);
-//     if(resp.idUser){
-//         return {
-//             "idUser": resp.idUser,
-//             "nick": nick
-//         }
-//     }
-// }
+exports.sair = async(idUser) => {
+    return usuarioModel.sairSala(idUser);
+}

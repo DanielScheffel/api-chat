@@ -1,7 +1,7 @@
 const salaModel = require("../models/salaModel");
 const usuarioModel = require("../models/usuarioModel");
 
-exports.get = async() => {
+exports.get = async(req, res) => {
     return await salaModel.listarSalas();
 }
 
@@ -30,18 +30,18 @@ exports.enviarMensagem = async(nick, msg, idsala) => {
     }
     timestamp = Date.now()
     sala.msgs.push({
-        timestamp: timesstamp,
+        timestamp: timestamp,
         msg: msg,
         nick: nick
     })
     let resp = await salaModel.atualizarMensagens(sala);
-    return {"msg": "OK", "timestamp":timesstamp};
+    return {"msg": "OK", "timestamp":timestamp};
 }
 
-exports.buscarMensagens = async(idsala, timesstamp) => {
-    let mensagens = await salaModel.atualizarMensagens(idsala, timesstamp);
+exports.buscarMensagens = async(idsala, timestamp) => {
+    let mensagens = await salaModel.atualizarMensagens(idsala, timestamp);
     return{
-        "timestamp": mensagens[mensagens.length - 1].timesstamp,
+        "timestamp": mensagens[mensagens.length - 1].timestamp,
         "msgs": mensagens
     };
 }
